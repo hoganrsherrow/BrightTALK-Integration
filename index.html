@@ -856,7 +856,6 @@
     </noscript>
     <link rel="stylesheet" href="./assets/css/app.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <script src="./assets/js/index.js"></script>
 </head>
 
 <body
@@ -1538,8 +1537,10 @@
                                     class="has-tipalti-mid-blue-background-color has-background-dim-100 wp-block-cover__gradient-background has-background-dim"></span>
                                 <div class="wp-block-cover__inner-container">
                                     <div class="wp-container-2 wp-block-group slide-in-fwd-bottom-target">
+                                        <!-- Block for XML data -->
                                         <div class="wp-block-group__inner-container">
                                             <div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>
+                                            <!-- Fetched XML data needs to go here -->
                                             <div class="wp-block-columns">
                                                 <div class="wp-block-column" style="flex-basis:33%">
                                                     <div class="ub_call_to_action"
@@ -1599,6 +1600,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- XML data also needs to go here -->
                                             <div class="wp-block-columns">
                                                 <div class="wp-block-column" style="flex-basis:33%">
                                                     <div class="ub_call_to_action"
@@ -1955,6 +1957,7 @@
             </div>
         </footer>
     </div>
+    <script src="./assets/js/index.js"></script>
     <script>
         jQuery('.genesis-nav-menu.menu-primary').find('a').removeClass('active');
         document.addEventListener("scroll", makeMenuSelected);
