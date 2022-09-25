@@ -1,5 +1,9 @@
 //console.log("Connected to ./assets/js/index.js");
 
+// Use document.evaluate() ref https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript
+//const xpathResult = document.evaluate();
+
+
 // create html container for brightTalk
 var documentBody = document.getElementsByTagName("body");
 //console.log(documentBody[0]);
@@ -13,9 +17,10 @@ function createVideoEl(data) {
     let videoContainer = document.querySelector("div");
     console.log(data);
     console.log(data.documentElement);
-    console.log(data.documentElement.children);
-    console.log(data.documentElement.children[5]);
-    console.log(data.documentElement.children[5].href);
+    console.log(document.evaluate('/feed', data.documentElement));
+    //console.log(data.documentElement.children);
+    //console.log(data.documentElement.children[5]);
+    //console.log(data.documentElement.children[5].href);
     videoContainer.innerHTML = data.documentElement.children;
 }
 
