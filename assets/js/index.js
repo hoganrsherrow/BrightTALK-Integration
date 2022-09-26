@@ -30,17 +30,11 @@ function createVideoEl(data) {
 
 
 fetch("https://www.brighttalk.com/channel/19195/feed")
-    .then(response => {
-        //console.log(response);
-        return response.text();
-    })
-    .then(str => {
-        //console.log(str);
-         return new DOMParser().parseFromString(str, "text/xml");
-    })
-    .then(data => {
-        createVideoEl(data);
-    });
+    .then(response => response.text())
+    .then(str => new DOMParser().parseFromString(str, "text/xml"))
+    .then(data => data.evaluate('//*', data, data.ownerDocument === null ? data.documentElement : data.ownerDocument.documentElement, XPathResult.FIRST_ORDERED_NODE_TYPE, null))
+    .then(xmlDoc => console.log(xmlDoc));
+    
 
 /* data.documentElement contains entries.These entries hold the title, summary, thumbnail
    and video link. Look into using XML XPath to access the attributes of the XML elements.
