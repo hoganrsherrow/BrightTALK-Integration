@@ -14,10 +14,14 @@ documentBody[0].insertBefore(brightTalkContainerEl, documentBody[0].children[0])
 
 // insert video
 function createVideoEl(data) {
+    const resolver = () => {
+        return 'http://www.w3.org/2005/Atom'
+    }
     let videoContainer = document.querySelector("div");
     console.log(data);
-    console.log(data.documentElement);
-    console.log(document.evaluate('/feed', data.documentElement));
+    xmlDoc = data.documentElement
+    console.log(xmlDoc);
+    console.log(data.evaluate('//updated', data, resolver, XPathResult.ANY_TYPE, null));
     //console.log(data.documentElement.children);
     //console.log(data.documentElement.children[5]);
     //console.log(data.documentElement.children[5].href);
