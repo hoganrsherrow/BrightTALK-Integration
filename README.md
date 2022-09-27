@@ -5,6 +5,7 @@
 * Established ```fetch``` to BrightTALK.
 * Successfully parsed the XML data.
 * XML data required an XML function (```document.evaluate()```) to retrieve relevant     information from attributes (such as ```href``` values) found within the feed element. Successfully passed fetched and parsed XML data into ```evaluate()``` function to retrieve node information. 
+* Found work-around for NS Resolver to direct XPath to correct node. Retrieved ```href``` values for ```links``` under ```entry``` node.
 
 
 ## Future Steps:
