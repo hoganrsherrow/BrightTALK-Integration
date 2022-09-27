@@ -1,9 +1,30 @@
+let width = screen.width;
+console.log(width);
+
+const createContainerRowEl = () => {
+    let container = document.getElementById("brighttalk-container");
+    let row = document.createElement("div");
+    row.classList.add("row", "row-cols-1", "row-cols-md-3", "g-4");
+    row.id = "brighttalk-container-row";
+    container.appendChild(row);
+}
+
 const createVideoEl = (hrefArray) => {
-    let body = document.getElementById("body");
-    let video = document.createElement("a");
-    video.setAttribute('href', hrefArray[0]); 
-    video.innerHTML = `<img src="${hrefArray[1]}" />`;
-    body.appendChild(video);
+    let container = document.getElementById("brighttalk-container-row");
+    let video = document.createElement("div");
+    video.classList.add("col", "js-inview", "anim-slide-bottom"); 
+    video.innerHTML = `
+                        <div class="card card-hover"
+                            <div class="card-img">
+                                <div class="ratio ratio-16x9">
+                                    <a href="${hrefArray[0]}">
+                                        <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                      `;
+    container.appendChild(video);
 }
 
 
@@ -29,6 +50,7 @@ fetch("https://www.brighttalk.com/channel/19195/feed")
     })
     .then(xPathResults => {
         console.log(xPathResults);
+        createContainerRowEl();
         for(let i = 0; i < 6; i++) {
             getHref(xPathResults);
         }
