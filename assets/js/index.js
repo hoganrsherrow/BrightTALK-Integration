@@ -3,9 +3,9 @@ fetch("https://www.brighttalk.com/channel/19195/feed")
     .then(str => new DOMParser().parseFromString(str, "text/xml"))
     .then(data => {
         console.log(data);
-        return data.evaluate("/*[name()='feed']/*[name()='entry']", data, /*data.ownerDocument === null ? data.documentElement : data.ownerDocument.documentElement*/null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+        return data.evaluate("/*[name()='feed']/*[name()='entry']/*[name()='link']/@*[name()='href']", data, /*data.ownerDocument === null ? data.documentElement : data.ownerDocument.documentElement*/null, XPathResult.STRING_TYPE, null)
     })
-    .then(xmlDoc => console.log(xmlDoc));
+    .then(xmlDoc => console.log(xmlDoc.stringValue));
     
 
 /* data.documentElement contains entries.These entries hold the title, summary, thumbnail
