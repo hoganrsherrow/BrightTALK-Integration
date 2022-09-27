@@ -1,3 +1,12 @@
+const createVideoEl = (hrefArray) => {
+    let body = document.getElementById("body");
+    let video = document.createElement("a");
+    video.setAttribute('href', hrefArray[0]); 
+    video.innerHTML = `<img src="${hrefArray[1]}" />`;
+    body.appendChild(video);
+}
+
+
 const getHref = (results) => {
     let attributes = [];
     for(let i = 0; i < 3; i++) {
@@ -6,6 +15,7 @@ const getHref = (results) => {
         console.log(thisNode.textContent);
     }
     console.log(attributes);
+    createVideoEl(attributes);
 }
 
 
