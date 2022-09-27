@@ -20,4 +20,5 @@
 
  ## Daily Screenshot
  * Shows the BrightTALK cards rendered in their col-1-med-3 flex orientation. All links direct towards href provided from XML content. 
-   ![day three image](./assets/img/day-3.PNG "Day Three")
+
+![day three image](./assets/img/day-3.PNG "Day Three")
