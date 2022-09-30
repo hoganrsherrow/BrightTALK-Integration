@@ -15,7 +15,7 @@ const createVideoEl = (hrefArray) => {
                             <div class="card-img">
                                 <div class="ratio ratio-16x9">
                                     <a href="${hrefArray[0]}" target="_blank">
-                                        <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy"/>
+                                        <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy" />
                                     </a>
                                 </div>
                             </div>

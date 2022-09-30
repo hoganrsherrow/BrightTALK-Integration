@@ -1591,120 +1591,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="wp-block-cover alignfull is-light ticss-2f81b054" id="upcoming-webinars"><span
-                                    aria-hidden="true"
-                                    class="has-white-background-color has-background-dim-100 wp-block-cover__gradient-background has-background-dim"></span>
-                                <div class="wp-block-cover__inner-container">
-                                    <div class="wp-container-6 wp-block-group">
-                                        <div class="wp-block-group__inner-container">
-                                            <h2>Upcoming Webinars</h2>
-                                            <style>
-                                                .tipalti_event_grid .tipalti_post_grid,
-                                                html .tipalti_post_grid_no_pagination {
-                                                    width: 100%;
-                                                    display: flex;
-                                                    flex-wrap: wrap
-                                                }
-
-                                                .event_details {
-                                                    position: absolute;
-                                                    top: 50%;
-                                                    left: 50%;
-                                                    transform: translate(-50%, -50%);
-                                                    width: 100%;
-                                                    padding: 20px
-                                                }
-
-                                                .event_details h2 {
-                                                    font-size: 22px;
-                                                    font-weight: 700
-                                                }
-
-                                                .tipalti_grid_post_thumbnail {
-                                                    display: inline-block;
-                                                    overflow: hidden;
-                                                    position: relative
-                                                }
-
-                                                .tipalti_grid_post_thumbnail img {
-                                                    filter: brightness(.6);
-                                                    position: inherit
-                                                }
-
-                                                .tipalti_grid_post_wrapper.gallery-item {
-                                                    margin-right: 50px
-                                                }
-
-                                                .tipalti_grid_post_overlay {
-                                                    position: absolute;
-                                                    top: 0;
-                                                    left: 0;
-                                                    height: 100%;
-                                                    width: 100%;
-                                                    display: -webkit-box;
-                                                    display: -ms-flexbox;
-                                                    display: flex;
-                                                    -webkit-box-pack: center;
-                                                    -ms-flex-pack: center;
-                                                    justify-content: center;
-                                                    -webkit-box-align: center;
-                                                    -ms-flex-align: center;
-                                                    align-items: center
-                                                }
-
-                                                .tipalti_grid_post_overlay_text {
-                                                    visibility: hidden;
-                                                    display: table-cell;
-                                                    vertical-align: middle;
-                                                    text-align: center;
-                                                    position: relative
-                                                }
-
-                                                .tipalti_grid_post_overlay_text.always_visible {
-                                                    visibility: visible;
-                                                    color: #fff;
-                                                    background: #00000020;
-                                                    width: 100%;
-                                                    height: 100%
-                                                }
-
-                                                .tipalti_grid_post_overlay.hover {
-                                                    background: rgba(0, 0, 0, .2);
-                                                    cursor: pointer
-                                                }
-                                            </style>
-                                            <div style="margin: 100px 0">More event information coming soon, please
-                                                check back.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="wp-block-cover alignfull is-light"><span aria-hidden="true"
                                     class="has-white-background-color has-background-dim-100 wp-block-cover__gradient-background has-background-dim"></span>
                                 <div class="wp-block-cover__inner-container">
                                     <div class="wp-container-7 wp-block-group">
                                         <div class="wp-block-group__inner-container">
-                                            <h2>Past Webinars</h2>
-                                            <div class="wp-block-columns">
-                                                <div class="wp-block-column">
-                                                    <div class="ub_call_to_action ticss-b5703b94"
-                                                        id="ub_call_to_action_b555fe50-6755-405e-ad81-7438b6f036fb">
-                                                        <div class="ub_call_to_action_headline">
-                                                            <p class="ub_call_to_action_headline_text"><strong>On-Demand
-                                                                    Webinars</strong></p>
-                                                        </div>
-                                                        <div class="ub_call_to_action_content">
-                                                            <p class="ub_cta_content_text"></p>
-                                                        </div>
-                                                        <div class="ub_call_to_action_button"><a
-                                                                href="https://tipalti.com/webinars/" target="_self"
-                                                                rel="noopener noreferrer" class="ub_cta_button">
-                                                                <p class="ub_cta_button_text">WATCH NOW</p>
-                                                            </a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="wp-block-column hide-on-mobile"></div>
-                                                <div class="wp-block-column hide-on-mobile"></div>
+                                            <h2>Webinars</h2>
+                                            <div class="container" id="brighttalk-container">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -2004,6 +1898,63 @@
             </div>
         </footer>
     </div>
+    <script>
+        const createContainerRowEl = () => {
+        let container = document.getElementById("brighttalk-container");
+        let row = document.createElement("div");
+        row.classList.add("row", "row-cols-1", "row-cols-md-3", "g-4");
+        row.id = "brighttalk-container-row";
+        container.appendChild(row);
+    }
+
+    const createWebinarEl = (hrefArray) => {
+        let container = document.getElementById("brighttalk-container-row");
+        let webinar = document.createElement("div");
+        webinar.classList.add("col", "js-inview", "anim-slide-bottom"); 
+        webinar.innerHTML = `
+                            <div class="card card-hover"
+                                <div class="card-img">
+                                    <div class="ratio ratio-16x9">
+                                        <a href="${hrefArray[0]}" target="_blank">
+                                            <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy" style="border-radius: 0.5rem;"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+        container.appendChild(webinar);
+    }
+
+
+    const getHref = (results) => {
+        let attributes = [];
+        for(let i = 0; i < 3; i++) {
+            let thisNode = results.iterateNext();
+            attributes.push(thisNode.textContent);
+            console.log(thisNode.textContent);
+        }
+        console.log(attributes);
+        createWebinarEl(attributes);
+    }
+
+
+
+    fetch("https://www.brighttalk.com/channel/19195/feed")
+        .then(response => response.text())
+        .then(str => new DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+            console.log(data);
+            return data.evaluate("//*[name()='entry'][position()<7]//*[name()='link']//@*[name()='href']", data, /*data.ownerDocument === null ? data.documentElement : data.ownerDocument.documentElement*/null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null)
+        })
+        .then(xPathResults => {
+            console.log(xPathResults);
+            createContainerRowEl();
+            for(let i = 0; i < 6; i++) {
+                getHref(xPathResults);
+            }
+        });
+    
+    </script>
     <script>
         jQuery('.genesis-nav-menu.menu-primary').find('a').removeClass('active');
         document.addEventListener("scroll", makeMenuSelected);
