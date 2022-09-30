@@ -9,16 +9,14 @@
 * Accessed all ```href``` values that are attributes of ```links``` descended from ```entries```.
 * Created ```createVideoEl()``` function to render webinar links with correct thumbnail images.
 * Created ```createContainerRow()``` function to target container tag and create a single row to emulate card functionality throught the rest of the Tipalti site. 
+* Moved code to ```index.html``` file and integrated code with event-hub page. 
 
 
 ## Future Steps:
- * move code from practice environment into dev enironement.
- * Mobile responsiveness
- * Style the section with XML data.
  * Make changes/updates if necessary.
 
 
  ## Daily Screenshot
- * Shows the BrightTALK cards rendered in their col-1-med-3 flex orientation. All links direct towards href provided from XML content. 
+ * Shows the BrightTALK cards rendered in the style  of the Upcoming events cards on the event-hub page. 
 
-![day three image](./assets/img/day-3.PNG "Day Three")
+![day four image](./assets/img/day-4.PNG "Day Four")
