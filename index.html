@@ -1594,10 +1594,10 @@
                             <div class="wp-block-cover alignfull is-light"><span aria-hidden="true"
                                     class="has-white-background-color has-background-dim-100 wp-block-cover__gradient-background has-background-dim"></span>
                                 <div class="wp-block-cover__inner-container">
-                                    <div class="wp-container-7 wp-block-group">
+                                    <div class="wp-container-5 wp-block-group">
                                         <div class="wp-block-group__inner-container">
                                             <h2>Webinars</h2>
-                                            <div class="container" id="brighttalk-container">
+                                            <div class="tipalti_event_grid" id="brighttalk-container">
                                                 
                                             </div>
                                         </div>
@@ -1902,7 +1902,7 @@
         const createContainerRowEl = () => {
         let container = document.getElementById("brighttalk-container");
         let row = document.createElement("div");
-        row.classList.add("row", "row-cols-1", "row-cols-md-3", "g-4");
+        row.classList.add("tipalti_post_grid", "gallery-columns-3");
         row.id = "brighttalk-container-row";
         container.appendChild(row);
     }
@@ -1910,17 +1910,15 @@
     const createWebinarEl = (hrefArray) => {
         let container = document.getElementById("brighttalk-container-row");
         let webinar = document.createElement("div");
-        webinar.classList.add("col", "js-inview", "anim-slide-bottom"); 
+        webinar.classList.add("tipalti_grid_post_wrapper", "gallery-item"); 
         webinar.innerHTML = `
-                            <div class="card card-hover"
-                                <div class="card-img">
-                                    <div class="ratio ratio-16x9">
-                                        <a href="${hrefArray[0]}" target="_blank">
-                                            <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy" style="border-radius: 0.5rem;"/>
-                                        </a>
+                            <a href="${hrefArray[0]}" target="_blank">
+                                <div class="tipalti_grid_post">
+                                    <div class="tipalti_grid_post_thumbnail with-flip-mid-horiz">
+                                        <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy" />
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         `;
         container.appendChild(webinar);
     }

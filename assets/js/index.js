@@ -1,7 +1,7 @@
 const createContainerRowEl = () => {
     let container = document.getElementById("brighttalk-container");
     let row = document.createElement("div");
-    row.classList.add("row", "row-cols-1", "row-cols-md-3", "g-4");
+    row.classList.add("tipalti_post_grid", "gallery-columns-3");
     row.id = "brighttalk-container-row";
     container.appendChild(row);
 }
