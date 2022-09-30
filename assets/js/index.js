@@ -1,10 +1,7 @@
-let width = screen.width;
-console.log(width);
-
 const createContainerRowEl = () => {
     let container = document.getElementById("brighttalk-container");
     let row = document.createElement("div");
-    row.classList.add("row", "row-cols-1", "row-cols-md-3", "g-4");
+    row.classList.add("tipalti_post_grid", "gallery-columns-3");
     row.id = "brighttalk-container-row";
     container.appendChild(row);
 }
@@ -17,8 +14,8 @@ const createVideoEl = (hrefArray) => {
                         <div class="card card-hover"
                             <div class="card-img">
                                 <div class="ratio ratio-16x9">
-                                    <a href="${hrefArray[0]}">
-                                        <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy"/>
+                                    <a href="${hrefArray[0]}" target="_blank">
+                                        <img src="${hrefArray[1]}" srcset="${hrefArray[1]} 100w, ${hrefArray[2]} 640w" width="350" height="196.88" class="img-cover" loading="lazy" />
                                     </a>
                                 </div>
                             </div>
