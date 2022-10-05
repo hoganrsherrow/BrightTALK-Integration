@@ -10,6 +10,7 @@
 * Created ```createVideoEl()``` function to render webinar links with correct thumbnail images.
 * Created ```createContainerRow()``` function to target container tag and create a single row to emulate card functionality throught the rest of the Tipalti site. 
 * Moved code to ```index.html``` file and integrated code with event-hub page. 
+* Added btn to render six more webinar links with each click.
 
 
 ## Future Steps:
@@ -17,6 +18,6 @@
 
 
  ## Daily Screenshot
- * Shows the BrightTALK cards rendered in the style  of the Upcoming events cards on the event-hub page. 
+ * Shows the BrightTALK cards rendered in the style of the Upcoming events cards on the event-hub page with the new btn added. 
 
-![day four image](./assets/img/day-4.PNG "Day Four")
+![day five image](./assets/img/day-5.PNG "Day Four")
