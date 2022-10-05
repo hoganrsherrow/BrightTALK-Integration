@@ -84,4 +84,10 @@ getXmlData();
 Restructure fetch request to be function that executes on load and then on btn click. Can use i counter to keep track.
 Potentially look at using iterateNext() instead of for loop in getXmlData()
 so that you will not run into errors when trying to load more webinars. 
+
+filter: none;
+
+.img-cover {
+    object-position: left;
+}
 */
