@@ -1935,6 +1935,20 @@
         createWebinarEl(attributes);
     }
 
+    const createBtnEl = () => {
+        let container = document.getElementById("brighttalk-container");
+        let btn = document.createElement("div");
+        btn.classList.add("fintalk-posts-load-more-wrap");
+        btn.innerHTML = `
+                        <a href="javascript:alert('I was clicked');" class="fintalk-posts-load-more wp-block-button__link">
+                            <span class="fintalk-posts-load-more-loader" style="display: none;">
+                                <img src="https://tipalti.com/wp-content/themes/tipalti_accelerated/images/spin1.jpeg" alt="The BrightTALK Webinars">
+                            </span>
+                            Load More
+                        </a>
+                    `;
+        container.appendChild(btn);
+    };
 
 
     fetch("https://www.brighttalk.com/channel/19195/feed")
@@ -1950,6 +1964,7 @@
             for(let i = 0; i < 6; i++) {
                 getHref(xPathResults);
             }
+            createBtnEl();
         });
     
     </script>
