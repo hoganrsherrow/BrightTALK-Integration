@@ -1900,7 +1900,7 @@
     </div>
     <script>
         // xml data is indexed at 1, not 0
-        let i = 1;
+        let eventCount = 1;
 
         const createContainerRowEl = () => {
             let container = document.getElementById("brighttalk-container");
@@ -1975,9 +1975,9 @@
                 .then(response => response.text())
                 .then(str => new DOMParser().parseFromString(str, "text/xml"))
                 .then(data => {
-                    //console.log(data);
-                    xPathResults = data.evaluate(`//*[name()='entry'][position() >= ${i} and not(position() > ${i + 5})]//*[name()='link']//@*[name()='href']`, data, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
-                    i += 6;
+                    console.log(data);
+                    xPathResults = data.evaluate(`//*[name()='entry'][position() >= ${eventCount} and not(position() > ${eventCount})]//*[name()='link']//@*[name()='href']`, data, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+                    eventCount += 6;
                     return xPathResults;
                 })
                 .then(xPathResults => {
