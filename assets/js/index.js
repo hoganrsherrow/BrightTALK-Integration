@@ -30,8 +30,13 @@ const getHref = (results) => {
     let attributes = [];
     for (let i = 0; i < 3; i++) {
         let thisNode = results.iterateNext();
-        attributes.push(thisNode.textContent);
-        //console.log(thisNode.textContent);
+        
+        if(!thisNode.textContent) {
+            console.log("null");
+        } else {
+            attributes.push(thisNode.textContent);
+        }
+        
     }
     //console.log(attributes);
     createWebinarEl(attributes);
@@ -76,7 +81,18 @@ const getXmlData = () => {
         .catch(err => console.log(err));
 };
 
-
+const entryCount = () => {
+    fetch("https://www.brighttalk.com/channel/19195/feed")
+    .then(response => response.text())
+    .then(str => new DOMParser().parseFromString(str, "text/xml"))
+    .then(data => {
+        //console.log(data);
+        let evalResult = data.evaluate(`count(//*[name()='entry'])`, data, null, XPathResult.NUMBER_TYPE, null);
+        console.log(evalResult.numberValue);
+        return evalResult.numberValue;
+    });
+}
+console.log(entryCount());
 getXmlData();
 //createBtnEl();
 
