@@ -75,8 +75,14 @@ const getXmlData = () => {
         .then(str => new DOMParser().parseFromString(str, "text/xml"))
         .then(data => {
             console.log(data);
-            const nsResolver = () => `http://www.w3.org/2005/Atom`;
-            xPathResults = data.evaluate(`count(//myns:entry)`, data, nsResolver, XPathResult.NUMBER_TYPE, null);
+            const nsResolver = (prefix) => {
+                const ns = {
+                    'myns': 'http://www.w3.org/2005/Atom',
+                    'bt': 'http://brighttalk.com/2009/atom_extensions'
+                }
+                return ns[prefix] || null;
+            };
+            xPathResults = data.evaluate(`//myns:entry[bt:status='recorded']`, data, nsResolver, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
             //eventCount += 6;
             return xPathResults;
         })
