@@ -1976,12 +1976,24 @@
                 .then(str => new DOMParser().parseFromString(str, "text/xml"))
                 .then(data => {
                     console.log(data);
-                    xPathResults = data.evaluate(`//*[name()='entry'][position() >= ${eventCount} and not(position() > ${eventCount})]//*[name()='link']//@*[name()='href']`, data, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+                    const nsResolver = (prefix) => {
+                        const ns = {
+                            'myns': 'http://www.w3.org/2005/Atom',
+                            'bt': 'http://brighttalk.com/2009/atom_extensions'
+                        }
+                        return ns[prefix] || null;
+                    };
+                    xPathResults = data.evaluate(`//myns:entry[bt:status='recorded'][position() >= ${eventCount} and not(position() > ${eventCount + 5})]//myns:link//@href[..//@type!='text/calendar']`, data, nsResolver, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
                     eventCount += 6;
                     return xPathResults;
                 })
                 .then(xPathResults => {
-                    //console.log(xPathResults);
+                    console.log(xPathResults);
+                    // let thisNode = xPathResults.iterateNext();
+                    // while(thisNode) {
+                    //     console.log(thisNode.textContent);
+                    //     thisNode = xPathResults.iterateNext();
+                    // }
                     createContainerRowEl();
                     for (let i = 0; i < 6; i++) {
                         getHref(xPathResults);
@@ -1991,7 +2003,11 @@
                         createBtnEl();
                     }
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    console.log(err)
+                    let btn = document.getElementById("brighttalk-btn");
+                    btn.classList.add("invisible");
+                });
         };
 
 

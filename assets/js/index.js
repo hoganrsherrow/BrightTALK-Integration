@@ -82,22 +82,31 @@ const getXmlData = () => {
                 }
                 return ns[prefix] || null;
             };
-            xPathResults = data.evaluate(`//myns:entry[bt:status='recorded']`, data, nsResolver, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-            //eventCount += 6;
+            xPathResults = data.evaluate(`//myns:entry[bt:status='recorded'][position() >= ${eventCount} and not(position() > ${eventCount + 5})]//myns:link//@href[..//@type!='text/calendar']`, data, nsResolver, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+            eventCount += 6;
             return xPathResults;
         })
         .then(xPathResults => {
             console.log(xPathResults);
-            // createContainerRowEl();
-            // for (let i = 0; i < 6; i++) {
-            //     getHref(xPathResults);
+            // let thisNode = xPathResults.iterateNext();
+            // while(thisNode) {
+            //     console.log(thisNode.textContent);
+            //     thisNode = xPathResults.iterateNext();
             // }
-            // let btn = document.getElementById("brighttalk-btn");
-            // if(!btn) {
-            //     createBtnEl();
-            // }
+            createContainerRowEl();
+            for (let i = 0; i < 6; i++) {
+                getHref(xPathResults);
+            }
+            let btn = document.getElementById("brighttalk-btn");
+            if(!btn) {
+                createBtnEl();
+            }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err)
+            let btn = document.getElementById("brighttalk-btn");
+            btn.classList.add("hide");
+        });
 };
 
 
@@ -108,4 +117,5 @@ getXmlData();
 
 /*
 [position() >= ${eventCount} and not(position() > ${eventCount + 5})]//*[name()='link']//@*[name()='href']
+[bt:status='recorded']
 */
