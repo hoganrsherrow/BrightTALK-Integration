@@ -1,16 +1,17 @@
 // xml data is indexed at 1, not 0
-let eventCount = 1;
+let recordedEventCount = 1;
+let upcomingEventCount = 1;
 
-const createContainerRowEl = () => {
-    let container = document.getElementById("brighttalk-container");
+const createContainerRowEl = (containerName) => {
+    let container = document.getElementById(`${containerName}-container`);
     let row = document.createElement("div");
     row.classList.add("tipalti_post_grid", "gallery-columns-3");
-    row.id = "brighttalk-container-row";
+    row.id = `${containerName}-container-row`;
     container.appendChild(row);
 }
 
-const createWebinarEl = (hrefArray) => {
-    let container = document.getElementById("brighttalk-container-row");
+const createWebinarEl = (hrefArray, rowName) => {
+    let container = document.getElementById(`${rowName}-container-row`);
     let webinar = document.createElement("div");
     webinar.classList.add("tipalti_grid_post_wrapper", "gallery-item");
     webinar.innerHTML = `
@@ -26,23 +27,31 @@ const createWebinarEl = (hrefArray) => {
 }
 
 
-const getHref = (results) => {
+const getHref = (results, rowName) => {
     let attributes = [];
     for (let i = 0; i < 3; i++) {
         let thisNode = results.iterateNext();
-        attributes.push(thisNode.textContent);
+        if(thisNode) {
+            attributes.push(thisNode.textContent);
+        } else {
+            let btn = document.getElementById(`${rowName}-btn`);
+            btn.classList.add("hide");
+            console.log("'Tis null.");
+            return;
+        }
+        
         //console.log(thisNode.textContent);
     }
     //console.log(attributes);
-    createWebinarEl(attributes);
+    createWebinarEl(attributes, rowName);
 }
 
-const createBtnEl = () => {
-    let container = document.getElementById("brighttalk-container");
+const createBtnEl = (containerName, functionCall) => {
+    let container = document.getElementById(`${containerName}-container`);
     let btn = document.createElement("div");
     btn.classList.add("fintalk-posts-load-more-wrap");
     btn.innerHTML = `
-                    <a href="javascript:getXmlData();" class="fintalk-posts-load-more wp-block-button__link" id="brighttalk-btn" 
+                    <a href="javascript:${functionCall}();" class="fintalk-posts-load-more wp-block-button__link" id="${containerName}-btn" 
                     style="
                         background: #ffbd00;
                         color: #000;
@@ -61,7 +70,7 @@ const createBtnEl = () => {
                         white-space: nowrap;
                         ">
                         <span class="fintalk-posts-load-more-loader" style="display: none;">
-                            <img src="https://tipalti.com/wp-content/themes/tipalti_accelerated/images/spin1.jpeg" alt="The BrightTALK Webinars">
+                            <img src="https://tipalti.com/wp-content/themes/tipalti_accelerated/images/spin1.jpeg" alt="${containerName} BrightTALK Webinars">
                         </span>
                         Load More
                     </a>
@@ -69,7 +78,7 @@ const createBtnEl = () => {
     container.append(btn);
 };
 
-const getXmlData = () => {
+const getUpcomingWebinars = () => {
     fetch("https://www.brighttalk.com/channel/19195/feed")
         .then(response => response.text())
         .then(str => new DOMParser().parseFromString(str, "text/xml"))
@@ -82,35 +91,67 @@ const getXmlData = () => {
                 }
                 return ns[prefix] || null;
             };
-            xPathResults = data.evaluate(`//myns:entry[bt:status='recorded'][position() >= ${eventCount} and not(position() > ${eventCount + 5})]//myns:link//@href[..//@type!='text/calendar']`, data, nsResolver, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
-            eventCount += 6;
+            xPathResults = data.evaluate(`//myns:entry[bt:status='upcoming'][position() >= ${upcomingEventCount} and not(position() > ${upcomingEventCount + 5})]//myns:link//@href[..//@type!='text/calendar']`, data, nsResolver, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+            upcomingEventCount += 6;
             return xPathResults;
         })
         .then(xPathResults => {
             console.log(xPathResults);
-            // let thisNode = xPathResults.iterateNext();
-            // while(thisNode) {
-            //     console.log(thisNode.textContent);
-            //     thisNode = xPathResults.iterateNext();
-            // }
-            createContainerRowEl();
+            createContainerRowEl("upcoming");
             for (let i = 0; i < 6; i++) {
-                getHref(xPathResults);
+                getHref(xPathResults, "upcoming");
             }
-            let btn = document.getElementById("brighttalk-btn");
+            let btn = document.getElementById("upcoming-btn");
             if(!btn) {
-                createBtnEl();
+                createBtnEl("upcoming", "getUpcomingWebinars");
             }
         })
         .catch(err => {
             console.log(err)
-            let btn = document.getElementById("brighttalk-btn");
+            let btn = document.getElementById("upcoming-btn");
             btn.classList.add("hide");
         });
 };
 
 
-getXmlData();
+
+const getRecordedWebinars = () => {
+    fetch("https://www.brighttalk.com/channel/19195/feed")
+        .then(response => response.text())
+        .then(str => new DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+            console.log(data);
+            const nsResolver = (prefix) => {
+                const ns = {
+                    'myns': 'http://www.w3.org/2005/Atom',
+                    'bt': 'http://brighttalk.com/2009/atom_extensions'
+                }
+                return ns[prefix] || null;
+            };
+            xPathResults = data.evaluate(`//myns:entry[bt:status='recorded'][position() >= ${recordedEventCount} and not(position() > ${recordedEventCount + 5})]//myns:link//@href[..//@type!='text/calendar']`, data, nsResolver, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+            recordedEventCount += 6;
+            return xPathResults;
+        })
+        .then(xPathResults => {
+            console.log(xPathResults);
+            createContainerRowEl("brighttalk");
+            for (let i = 0; i < 6; i++) {
+                getHref(xPathResults, "brighttalk");
+            }
+            let btn = document.getElementById("brighttalk-btn");
+            if(!btn) {
+                createBtnEl("brighttalk", "getRecordedWebinars");
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            let btn = document.getElementById("brighttalk-btn");
+            //btn.classList.add("hide");
+        });
+};
+
+getUpcomingWebinars();
+getRecordedWebinars();
 
 
 
