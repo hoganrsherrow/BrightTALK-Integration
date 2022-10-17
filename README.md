@@ -11,6 +11,8 @@
 * Created ```createContainerRow()``` function to target container tag and create a single row to emulate card functionality throught the rest of the Tipalti site. 
 * Moved code to ```index.html``` file and integrated code with event-hub page. 
 * Added btn to render six more webinar links with each click.
+* Added 'Upcoming Webinars section'.
+* Btns are hidden once there is no more content to render.
 
 
 ## Future Steps:
@@ -18,6 +20,6 @@
 
 
  ## Daily Screenshot
- * Shows the BrightTALK cards rendered in the style of the Upcoming events cards on the event-hub page with the new btn added. 
+ * Shows the upcoming and recorded webinars after all content has been rendered and btns are hidden. 
 
-![day five image](./assets/img/day-5.PNG "Day Four")
+![upcoming webinars img](./screencapture-file-C-Users-User-code-BrightTALK-Integration-index-html-2022-10-16-23_36_36.png "Upcoming Webinars")
