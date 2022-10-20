@@ -22,4 +22,4 @@
  ## Daily Screenshot
  * Shows the upcoming and recorded webinars after all content has been rendered and btns are hidden. 
 
-![upcoming webinars img](./screencapture-file-C-Users-User-code-BrightTALK-Integration-index-html-2022-10-16-23_36_36.png "Upcoming Webinars")
+![upcoming webinars img](./BrightTALK-dates.png "Upcoming Webinars")
