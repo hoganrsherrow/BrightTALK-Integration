@@ -83,7 +83,7 @@ const getUpcomingWebinars = () => {
         .then(response => response.text())
         .then(str => new DOMParser().parseFromString(str, "text/xml"))
         .then(data => {
-            console.log(data);
+            // console.log(data);
             const nsResolver = (prefix) => {
                 const ns = {
                     'myns': 'http://www.w3.org/2005/Atom',
@@ -96,7 +96,7 @@ const getUpcomingWebinars = () => {
             return xPathResults;
         })
         .then(xPathResults => {
-            console.log(xPathResults);
+            // console.log(xPathResults);
             createContainerRowEl("upcoming");
             for (let i = 0; i < 6; i++) {
                 getHref(xPathResults, "upcoming");
@@ -113,7 +113,26 @@ const getUpcomingWebinars = () => {
         });
 };
 
-
+const getUpcomingWebinarDates = () => {
+    console.log("---getting dates---");
+    fetch("https://www.brighttalk.com/channel/19195/feed")
+        .then(response => response.text())
+        .then(str => new DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+            const nsResolver = (prefix) => {
+                const ns = {
+                    'myns': 'http://www.w3.org/2005/Atom',
+                    'bt': 'http://brighttalk.com/2009/atom_extensions'
+                }
+                return ns[prefix] || null;
+            };
+            let xPathResults = data.evaluate(`//myns:entry[bt:status='upcoming'][position() >= ${upcomingEventCount} and not(position() > ${upcomingEventCount + 5})]//bt:start`, data, nsResolver, XPathResult.NUMBER_TYPE, null);
+            return xPathResults;
+        })
+        .then(xPathResults => {
+            console.log(xPathResults);
+        })
+}
 
 const getRecordedWebinars = () => {
     fetch("https://www.brighttalk.com/channel/19195/feed")
@@ -133,7 +152,7 @@ const getRecordedWebinars = () => {
             return xPathResults;
         })
         .then(xPathResults => {
-            console.log(xPathResults);
+            // console.log(xPathResults);
             createContainerRowEl("brighttalk");
             for (let i = 0; i < 6; i++) {
                 getHref(xPathResults, "brighttalk");
@@ -151,6 +170,7 @@ const getRecordedWebinars = () => {
 };
 
 getUpcomingWebinars();
+getUpcomingWebinarDates();
 getRecordedWebinars();
 
 
